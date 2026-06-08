@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>每日盯盘</title>
+<style>
+  :root{--parchment:#f5f4ed;--ivory:#faf9f5;--near-black:#141413;--dark-warm:#3d3d3a;--olive:#504e49;--stone:#6b6a64;--brand:#1B365D;--border:#e8e6dc;--border-soft:#e5e3d8;--up:#B22234;--up-bg:#fdf0f1;--down:#2E7D32;--down-bg:#eef7ef;--serif:"TsangerJinKai02","Source Han Serif SC","Songti SC",Georgia,serif;--sans:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif}
+  @font-face{font-family:"TsangerJinKai02";src:url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/TsangerJinKai02-W05.ttf") format("truetype");font-weight:500}
+  @font-face{font-family:"TsangerJinKai02";src:url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/TsangerJinKai02-W04.ttf") format("truetype");font-weight:400}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{background:var(--parchment);font-size:15px}
+  body{max-width:1000px;margin:0 auto;padding:16px 20px;background:var(--parchment);color:var(--near-black);font-family:var(--sans);line-height:1.5}
+  h1{font-family:var(--serif);font-size:1.3rem;font-weight:500;color:var(--near-black)}
+  h2{font-family:var(--serif);font-size:1.05rem;font-weight:500;color:var(--brand);border-left:2.5pt solid var(--brand);padding-left:8pt;margin:16pt 0 10pt}
+  .up{color:var(--up);font-weight:500}.down{color:var(--down);font-weight:500}
+  .page-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:10pt;padding-bottom:6pt;border-bottom:1px solid var(--border)}
+  .meta{font-size:.78rem;color:var(--stone)}
+  .card{background:var(--ivory);border:1px solid var(--border);border-radius:4pt;padding:12pt 14pt;margin-bottom:10pt;box-shadow:0 0 0 1pt rgba(27,54,93,.04)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:6pt}
+  .item{background:var(--parchment);border:1px solid var(--border-soft);border-radius:4pt;padding:8pt 10pt;text-align:center}
+  .item .label{font-size:.72rem;color:var(--stone)}.item .price{font-size:1rem;font-weight:500;font-family:var(--serif)}.item .change{font-size:.78rem;margin-top:1pt}
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:12pt}
+  @media(max-width:600px){.cols{grid-template-columns:1fr}}
+  .row{display:flex;justify-content:space-between;padding:4pt 0;border-bottom:1px solid var(--border-soft);font-size:.8rem}
+  .row:last-child{border-bottom:none}
+  .stats{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6pt}
+  .stat{text-align:center;padding:8pt;background:var(--parchment);border-radius:4pt}
+  .stat .num{font-size:1.05rem;font-weight:500;font-family:var(--serif)}.stat .lab{font-size:.7rem;color:var(--stone)}
+  .tab-nav{display:flex;gap:0;border-bottom:2px solid var(--border);margin-bottom:0;flex-wrap:wrap}
+  .tab-btn{padding:8pt 14pt;cursor:pointer;font-family:var(--serif);font-size:.85rem;font-weight:500;color:var(--stone);background:none;border:none;border-bottom:2.5pt solid transparent;margin-bottom:-2px;transition:.15s}
+  .tab-btn:hover{color:var(--brand)}.tab-btn.active{color:var(--brand);border-bottom-color:var(--brand)}
+  .tab-panel{display:none;padding-top:2pt}.tab-panel.active{display:block}
+  .footer{text-align:center;font-size:.7rem;color:var(--stone);margin-top:18pt;padding-top:8pt;border-top:1px solid var(--border)}
+  .loading{text-align:center;padding:40pt;color:var(--stone);font-family:var(--serif)}
+</style>
+</head>
+<body>
+<div class="page-header">
+  <div><h1>每日盯盘</h1><div class="meta" id="headerTime">加载中...</div></div>
+  <div class="meta">数据与 Ticino 飞书推送一致</div>
+</div>
+
+<div class="tab-nav">
+  <button class="tab-btn active" onclick="switchTab('overview')">市场总览</button>
+  <button class="tab-btn" onclick="switchTab('sectors')">行业板块</button>
+  <button class="tab-btn" onclick="switchTab('global')">全球资产</button>
+</div>
+
+<div id="tab-overview" class="tab-panel active">
+  <div id="content">
+    <div class="loading">数据加载中...</div>
+  </div>
+</div>
+<div id="tab-sectors" class="tab-panel"><div id="sectorsContent"><div class="loading">加载中...</div></div></div>
+<div id="tab-global" class="tab-panel"><div id="globalContent"><div class="loading">加载中...</div></div></div>
+
+<div class="footer">数据来源：AkShare · Sina · COMEX · 同花顺 THS · 与飞书 Ticino 推送同源<br><span id="footerTime"></span></div>
+
+<script>
+async function loadData() {
+  try {
+    const resp = await fetch('data.json');
+    if (!resp.ok) throw new Error('HTTP ' + resp.status);
+    return await resp.json();
+  } catch(e) {
+    console.error('Data load failed:', e);
+    return null;
+  }
+}
+
+function fmt(n, d=2) { return parseFloat(n).toFixed(d); }
+function chgClass(v) { return parseFloat(v)>0 ? 'up' : parseFloat(v)<0 ? 'down' : ''; }
+function chgSign(v) { return parseFloat(v)>0 ? '+' : ''; }
+
+function renderOverview(data) {
+  if (!data) return '<div class="loading">数据获取失败，请稍后重试</div>';
+
+  let html = '';
+
+  // A股指数
+  html += '<h2>A股指数</h2><div class="card"><div class="grid">';
+  for (const idx of (data.a_indices||[])) {
+    html += `<div class="item"><div class="label">${idx.name}</div>
+      <div class="price">${fmt(idx.price)}</div>
+      <div class="change ${chgClass(idx.change_pct)}">${chgSign(idx.change_pct)}${fmt(idx.change_pct)}%</div></div>`;
+  }
+  html += '</div></div>';
+
+  // 涨跌统计
+  const ms = data.market_stats||{};
+  if (ms.total) {
+    const total = ms.total||0, upRatio = ms.up_ratio||0;
+    html += '<h2>涨跌复盘</h2><div class="card"><div class="stats">'+
+      `<div class="stat"><div class="num">${ms.up||0}<span class="up">↑</span> / ${ms.down||0}<span class="down">↓</span></div><div class="lab">涨跌家数</div></div>`+
+      `<div class="stat"><div class="num">${ms.limit_up||0} / ${ms.limit_down||0}</div><div class="lab">涨停 / 跌停</div></div>`+
+      `<div class="stat"><div class="num">${ms.total_amount_yi||'—'}</div><div class="lab">成交额（亿）</div></div>`+
+      '<div class="stat"><div class="num">'+
+      `<span style="display:inline-block;width:${Math.max(upRatio,5)}px;height:8px;background:var(--up);border-radius:2px;margin-right:4px"></span>${upRatio}%`+
+      '</div><div class="lab">上涨比例</div></div>'+
+      '</div></div>';
+  }
+
+  // 新闻
+  const news = data.news||[];
+  if (news.length) {
+    html += '<h2>今日要闻</h2><div class="card">';
+    for (const n of news.slice(0,6)) {
+      html += `<div class="row"><span>${n.title}</span></div>`;
+    }
+    html += '</div>';
+  }
+
+  return html;
+}
+
+function renderSectors(data) {
+  if (!data || !data.sectors) return '<div class="loading">暂无数据</div>';
+
+  // Aggregate L2 to L1
+  const l1Map = {};
+  for (const s of data.sectors) {
+    const l1 = s.l1_code;
+    if (!l1) continue;
+    if (!l1Map[l1]) l1Map[l1] = [];
+    l1Map[l1].push(s.change_pct);
+  }
+  const l1Names = {"801010":"农林牧渔","801030":"基础化工","801040":"钢铁","801050":"有色金属",
+    "801080":"电子","801110":"家用电器","801120":"食品饮料","801130":"纺织服饰",
+    "801140":"轻工制造","801150":"医药生物","801160":"公用事业","801170":"交通运输",
+    "801180":"房地产","801200":"商贸零售","801210":"社会服务","801230":"综合",
+    "801710":"建筑材料","801720":"建筑装饰","801730":"电力设备","801740":"国防军工",
+    "801750":"计算机","801760":"传媒","801770":"通信","801780":"银行",
+    "801790":"非银金融","801880":"汽车","801890":"机械设备",
+    "801950":"煤炭","801960":"石油石化","801970":"环保","801980":"美容护理"};
+
+  const agg = [];
+  for (const [code, changes] of Object.entries(l1Map)) {
+    changes.sort((a,b)=>a-b);
+    const median = changes[Math.floor(changes.length/2)];
+    agg.push({code, name: l1Names[code]||code, change_pct: median});
+  }
+  agg.sort((a,b)=>b.change_pct - a.change_pct);
+
+  let html = '<h2>申万一级行业 涨跌 TOP5</h2><div class="card"><div class="cols">';
+  html += '<div><div style="font-size:.82rem;font-weight:500;color:var(--up);margin-bottom:4pt">涨幅前五</div>';
+  for (const s of agg.slice(0,5)) {
+    html += `<div class="row"><span>${s.name}</span><span class="up">+${fmt(s.change_pct)}%</span></div>`;
+  }
+  html += '</div><div><div style="font-size:.82rem;font-weight:500;color:var(--down);margin-bottom:4pt">跌幅前五</div>';
+  for (const s of agg.slice(-5).reverse()) {
+    html += `<div class="row"><span>${s.name}</span><span class="down">${fmt(s.change_pct)}%</span></div>`;
+  }
+  html += '</div></div></div>';
+  return html;
+}
+
+function renderGlobal(data) {
+  if (!data) return '<div class="loading">暂无数据</div>';
+  let html = '';
+
+  // 港股
+  const gi = data.global_indices||[];
+  const hk = gi.filter(i=>['恒生指数','恒生科技'].includes(i.name));
+  if (hk.length) {
+    html += '<h2>港股</h2><div class="card"><div class="grid">';
+    for (const i of hk) {
+      html += `<div class="item"><div class="label">${i.name}</div><div class="price">${fmt(i.price)}</div><div class="change ${chgClass(i.change_pct)}">${chgSign(i.change_pct)}${fmt(i.change_pct)}%</div></div>`;
+    }
+    html += '</div></div>';
+  }
+
+  // 美股
+  const us = gi.filter(i=>i.name.includes('纳斯达克')||i.name.includes('标普'));
+  if (us.length) {
+    html += '<h2>美股（昨收）</h2><div class="card"><div class="grid">';
+    for (const i of us) {
+      html += `<div class="item"><div class="label">${i.name.replace('(昨收)','')}</div><div class="price">${fmt(i.price,0)}</div><div class="change ${chgClass(i.change_pct)}">${chgSign(i.change_pct)}${fmt(i.change_pct)}%</div></div>`;
+    }
+    html += '</div></div>';
+  }
+
+  // 商品
+  const comm = data.commodities||[];
+  if (comm.length) {
+    html += '<h2>大宗商品</h2><div class="card"><div class="grid">';
+    for (const c of comm) {
+      html += `<div class="item"><div class="label">${c.name}</div><div class="price">${fmt(c.price)}</div><div class="change ${chgClass(c.change_pct)}">${chgSign(c.change_pct)}${fmt(c.change_pct)}%</div></div>`;
+    }
+    html += '</div></div>';
+  }
+
+  return html || '<div class="loading">数据加载中...</div>';
+}
+
+async function main() {
+  const data = await loadData();
+  const t = data ? data.generated_at : '数据加载失败';
+  document.getElementById('headerTime').textContent = t;
+  document.getElementById('footerTime').textContent = '报告生成：' + t;
+
+  document.getElementById('content').innerHTML = renderOverview(data);
+  document.getElementById('sectorsContent').innerHTML = renderSectors(data);
+  document.getElementById('globalContent').innerHTML = renderGlobal(data);
+}
+
+function switchTab(name) {
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelector(`[onclick="switchTab('${name}')"]`).classList.add('active');
+  document.getElementById('tab-'+name).classList.add('active');
+}
+
+main();
+</script>
+</body>
+</html>
