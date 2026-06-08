@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>每日盯盘 · {{ generated_at[:10] }}</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  /* KAMI DESIGN SYSTEM v3 — 多标签页 · 图表 · 事件日历 */
+  @font-face{font-family:"TsangerJinKai02";src:url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/TsangerJinKai02-W05.ttf") format("truetype");font-weight:500}
+  @font-face{font-family:"TsangerJinKai02";src:url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/TsangerJinKai02-W04.ttf") format("truetype");font-weight:400}
+  :root{--parchment:#f5f4ed;--ivory:#faf9f5;--near-black:#141413;--dark-warm:#3d3d3a;--olive:#504e49;--stone:#6b6a64;--brand:#1B365D;--border:#e8e6dc;--border-soft:#e5e3d8;--up:#B22234;--up-bg:#fdf0f1;--down:#2E7D32;--down-bg:#eef7ef;--serif:"TsangerJinKai02","Source Han Serif SC","Songti SC",Georgia,serif;--sans:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{background:var(--parchment);font-size:15px}
+  body{max-width:1040px;margin:0 auto;padding:16px 20px;background:var(--parchment);color:var(--near-black);font-family:var(--sans);line-height:1.5;letter-spacing:.3pt}
+  h2{font-family:var(--serif);font-size:1.1rem;font-weight:500;color:var(--brand);border-left:2.5pt solid var(--brand);padding-left:8pt;margin:16pt 0 10pt}
+  .up{color:var(--up);font-weight:500}.down{color:var(--down);font-weight:500}
+
+  /* Tabs */
+  .tab-nav{display:flex;gap:0;border-bottom:2px solid var(--border);margin-bottom:0;flex-wrap:wrap}
+  .tab-btn{padding:8pt 14pt;cursor:pointer;font-family:var(--serif);font-size:.85rem;font-weight:500;color:var(--stone);background:none;border:none;border-bottom:2.5pt solid transparent;margin-bottom:-2px;transition:.15s}
+  .tab-btn:hover{color:var(--brand)}
+  .tab-btn.active{color:var(--brand);border-bottom-color:var(--brand)}
+  .tab-panel{display:none;padding-top:2pt}
+  .tab-panel.active{display:block}
+
+  .page-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:10pt;padding-bottom:6pt;border-bottom:1px solid var(--border)}
+  .page-header h1{font-family:var(--serif);font-size:1.35rem;font-weight:500;color:var(--near-black);border:none;padding:0;margin:0}
+  .meta{font-size:.78rem;color:var(--stone)}
+
+  .card{background:var(--ivory);border:1px solid var(--border);border-radius:4pt;padding:12pt 14pt;margin-bottom:10pt;box-shadow:0 0 0 1pt rgba(27,54,93,.04)}
+  .asset-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:6pt}
+  .asset-card{background:var(--parchment);border:1px solid var(--border-soft);border-radius:4pt;padding:8pt 10pt;text-align:center}
+  .asset-card .label{font-size:.72rem;color:var(--stone);margin-bottom:1pt}
+  .asset-card .price{font-size:1rem;font-weight:500;font-family:var(--serif)}
+  .asset-card .change{font-size:.78rem;margin-top:1pt}
+  .asset-card .chart-link{font-size:.65rem;color:var(--brand);text-decoration:none;display:block;margin-top:2pt}
+  .asset-card .chart-link:hover{text-decoration:underline}
+
+  .sector-cols{display:grid;grid-template-columns:1fr 1fr;gap:12pt}
+  @media(max-width:600px){.sector-cols{grid-template-columns:1fr}}
+  .sector-row{display:flex;justify-content:space-between;padding:4pt 0;border-bottom:1px solid var(--border-soft);font-size:.8rem}
+  .sector-row:last-child{border-bottom:none}
+
+  .stats-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6pt}
+  .stat-block{text-align:center;padding:8pt;background:var(--parchment);border-radius:4pt}
+  .stat-block .num{font-size:1.05rem;font-weight:500;font-family:var(--serif)}
+  .stat-block .lab{font-size:.7rem;color:var(--stone);margin-top:1pt}
+
+  .style-badge{display:inline-block;font-weight:500;padding:4pt 10pt;border-radius:4pt;font-size:.88rem}
+  .style-badge.bearish{background:var(--down-bg);color:var(--down)}
+  .style-badge.cautious{background:#f5eedc;color:#6b5a2e}
+  .style-badge.bullish{background:var(--up-bg);color:var(--up)}
+  .style-badge.neutral,.style-badge.positive{background:#E4ECF5;color:var(--brand)}
+
+  .psych-box{background:var(--parchment);border:1px solid var(--border);border-radius:4pt;padding:14pt 16pt;font-family:var(--serif);font-size:.88rem;color:var(--olive);line-height:1.8}
+  .psych-box p{margin-bottom:8pt}
+  .psych-box p:last-child{margin-bottom:0}
+
+  .highlight-box{background:var(--parchment);border-left:2.5pt solid var(--brand);padding:10pt 12pt;border-radius:2pt}
+  .highlight-box .eyebrow{font-size:.72rem;color:var(--stone);margin-bottom:2pt}
+
+  .broker-item{padding:3pt 0;border-bottom:1px solid var(--border-soft);font-size:.8rem;line-height:1.5}
+  .broker-item:last-child{border-bottom:none}
+
+  .advice-item{display:flex;gap:6pt;padding:2pt 0;font-size:.82rem}
+  .advice-name{font-weight:500;min-width:85pt}
+
+  .page-footer{text-align:center;font-size:.7rem;color:var(--stone);margin-top:18pt;padding-top:8pt;border-top:1px solid var(--border)}
+
+  .bar-chart{display:flex;align-items:flex-end;gap:1px;height:50px;margin-top:4pt}
+  .bar{flex:1;min-width:6px;border-radius:1px 1px 0 0}
+  .bar.up-bar{background:var(--up);opacity:.7}
+  .bar.down-bar{background:var(--down);opacity:.7}
+  .bar.flat-bar{background:var(--stone);opacity:.5}
+
+  .event-table{width:100%;font-size:.78rem;border-collapse:collapse}
+  .event-table td{padding:5pt 8pt;border-bottom:1px solid var(--border-soft)}
+  .event-table .event-date{font-weight:500;color:var(--brand);white-space:nowrap;width:80pt}
+  .event-tag{display:inline-block;font-size:.65rem;padding:1pt 5pt;border-radius:2pt;margin-right:3pt}
+  .event-tag.fomc{background:#fde8e8;color:#8b2e2e}
+  .event-tag.data{background:#f5eedc;color:#6b5a2e}
+  .event-tag.ipo{background:#e0efe0;color:#2d5a2a}
+  .event-tag.geo{background:#fce4d6;color:#8b4513}
+
+  .news-tag{display:inline-block;font-size:.65rem;font-weight:500;padding:1pt 5pt;border-radius:2pt;margin-right:2pt;vertical-align:middle}
+  .news-tag.policy{background:#E4ECF5;color:var(--brand)}
+  .news-tag.data{background:#f5eedc;color:#6b5a2e}
+  .news-tag.rate{background:#fde8e8;color:#8b2e2e}
+  .news-tag.geo{background:#fce4d6;color:#8b4513}
+  .news-tag.corp{background:var(--down-bg);color:var(--down)}
+  .news-tag.commod{background:#e8f0e8;color:var(--down)}
+  .news-tag.fx{background:#f5eedc;color:#6b5a2e}
+
+  .ai-bullets{font-size:.84rem;line-height:1.7}
+  .ai-bullets .bullet{margin:3pt 0;padding-left:12pt;text-indent:-12pt}
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div><h1>每日盯盘</h1><div class="meta">{{ generated_at }} · {{ weekday_cn }}</div></div>
+  <div class="meta">Sina · THS · SW · COMEX · DeepSeek</div>
+</div>
+
+<!-- Tabs -->
+<div class="tab-nav">
+  <button class="tab-btn active" onclick="switchTab('overview')">市场总览</button>
+  <button class="tab-btn" onclick="switchTab('sectors')">行业板块</button>
+  <button class="tab-btn" onclick="switchTab('global')">全球资产</button>
+  <button class="tab-btn" onclick="switchTab('brokers')">机构观点</button>
+  <button class="tab-btn" onclick="switchTab('advice')">操作建议</button>
+</div>
+
+<!-- ============ 1. 市场总览 ============ -->
+<div id="tab-overview" class="tab-panel active">
+
+  <!-- AI 摘要 -->
+  {% if ai_summary %}
+  <h2>AI 摘要</h2>
+  <div class="highlight-box"><div class="body">{{ ai_summary }}</div></div>
+  {% endif %}
+
+  <!-- 今日要闻 -->
+  <h2>今日要闻</h2>
+  <div class="card">
+    {% for n in top_news[:6] %}
+    <div class="broker-item">
+      <span class="news-tag {{ n.tag_cn_en }}">{{ n.tag_cn }}</span>
+      {{ n.title }}
+    </div>
+    {% endfor %}
+  </div>
+
+  <!-- A股指数 -->
+  <h2>A股指数</h2>
+  <div class="card">
+    <div class="asset-grid">
+    {% for idx in a_indices if idx.name in ['上证指数','沪深300','科创50','创业板指','中证A500'] %}
+      <div class="asset-card">
+        <div class="label">{{ idx.name }}</div>
+        <div class="price">{{ "%.2f"|format(idx.price|float) }}</div>
+        <div class="change {% if idx.change_pct|float > 0 %}up{% else %}down{% endif %}">
+          {{ "%+.2f"|format(idx.change_pct|float) }}%
+        </div>
+        <a class="chart-link" href="https://finance.sina.com.cn/realstock/company/{{ idx.code }}/nc.shtml" target="_blank">K线图 →</a>
+      </div>
+    {% endfor %}
+    </div>
+  </div>
+
+  <!-- 涨跌复盘 -->
+  <h2>涨跌复盘</h2>
+  <div class="card">
+    <div class="stats-grid">
+      <div class="stat-block">
+        <div class="num">{{ summary.up_count }}<span class="up">↑</span> / {{ summary.down_count }}<span class="down">↓</span></div>
+        <div class="lab">涨跌家数（上涨比 {{ summary.up_ratio }}%）</div>
+        <div class="bar-chart">
+          {% set up_w = (summary.up_count / summary.total * 100)|int if summary.total else 50 %}
+          {% set down_w = (summary.down_count / summary.total * 100)|int if summary.total else 50 %}
+          <div class="bar up-bar" style="flex:{{ up_w }}"></div>
+          <div class="bar down-bar" style="flex:{{ down_w }}"></div>
+        </div>
+      </div>
+      <div class="stat-block">
+        <div class="num">{{ summary.limit_up }} <span class="up">涨停</span> / {{ summary.limit_down }} <span class="down">跌停</span></div>
+        <div class="lab">涨跌停统计</div>
+      </div>
+      <div class="stat-block">
+        <div class="num">{{ "%.0f"|format(summary.total_amount_yi) }} 亿</div>
+        <div class="lab">成交额{% if summary.volume_note %}（{{ summary.volume_note }}）{% endif %}</div>
+      </div>
+      <div class="stat-block">
+        <div class="num">{{ "%.1f"|format(summary.south_flow_yi) }} 亿</div>
+        <div class="lab">南向资金净流入</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ============ 2. 行业板块 ============ -->
+<div id="tab-sectors" class="tab-panel">
+
+  <h2>申万行业 涨跌 TOP5</h2>
+  <div class="card">
+    <div class="sector-cols">
+      <div>
+        <div style="font-size:.82rem;font-weight:500;color:var(--up);margin-bottom:4pt">涨幅前五</div>
+        {% for s in sector_gainers %}
+        <div class="sector-row"><span style="width:18pt;color:var(--stone)">{{ loop.index }}.</span><span>{{ s.name }}</span><span class="up">+{{ "%.2f"|format(s.change_pct) }}%</span></div>
+        {% endfor %}
+      </div>
+      <div>
+        <div style="font-size:.82rem;font-weight:500;color:var(--down);margin-bottom:4pt">跌幅前五</div>
+        {% for s in sector_losers %}
+        <div class="sector-row"><span style="width:18pt;color:var(--stone)">{{ loop.index }}.</span><span>{{ s.name }}</span><span class="down">{{ "%.2f"|format(s.change_pct) }}%</span></div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <!-- 资金动向 -->
+  <h2>资金动向</h2>
+  <div class="card">
+    <div class="sector-cols">
+      <div>
+        <div style="font-size:.82rem;font-weight:500;color:var(--up);margin-bottom:4pt">资金流入 TOP5</div>
+        {% for f in fund_flow.get('inflow', [])[:5] %}
+        <div class="sector-row"><span>{{ f.name }}</span><span class="up">+{{ "%.1f"|format(f.amount) }} 亿</span></div>
+        {% endfor %}
+        {% if not fund_flow.get('inflow') %}<div style="font-size:.78rem;color:var(--stone)">数据获取中（EM 源不可用）</div>{% endif %}
+      </div>
+      <div>
+        <div style="font-size:.82rem;font-weight:500;color:var(--down);margin-bottom:4pt">资金流出 TOP5</div>
+        {% for f in fund_flow.get('outflow', [])[:5] %}
+        <div class="sector-row"><span>{{ f.name }}</span><span class="down">{{ "%.1f"|format(f.amount) }} 亿</span></div>
+        {% endfor %}
+        {% if not fund_flow.get('outflow') %}<div style="font-size:.78rem;color:var(--stone)">数据获取中（EM 源不可用）</div>{% endif %}
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ============ 3. 全球资产 ============ -->
+<div id="tab-global" class="tab-panel">
+
+  <h2>港股</h2>
+  <div class="card">
+    <div class="asset-grid">
+    {% for idx in global_indices if idx.name in ['恒生指数','恒生科技','港股创新药'] %}
+      <div class="asset-card">
+        <div class="label">{{ idx.name }}</div>
+        <div class="price">{{ "%.2f"|format(idx.price|float) }}</div>
+        <div class="change {% if idx.change_pct|float > 0 %}up{% else %}down{% endif %}">
+          {{ "%+.2f"|format(idx.change_pct|float) }}%
+        </div>
+      </div>
+    {% endfor %}
+    </div>
+    {% set has_hk = namespace(found=false) %}{% for idx in global_indices %}{% if idx.name == '港股创新药' %}{% set has_hk.found = true %}{% endif %}{% endfor %}
+    {% if not has_hk.found %}<div style="font-size:.78rem;color:var(--stone)">港股创新药指数：Sina 源不支持，建议接 Tushare</div>{% endif %}
+  </div>
+
+  <h2>美股（昨收）</h2>
+  <div class="card">
+    <div class="asset-grid">
+    {% for idx in global_indices if '纳斯达克' in idx.name or '标普500' in idx.name %}
+      <div class="asset-card">
+        <div class="label">{{ idx.name.replace(' (昨收)','') }}</div>
+        <div class="price">{{ "%.0f"|format(idx.price|float) }}</div>
+        <div class="change {% if idx.change_pct|float > 0 %}up{% else %}down{% endif %}">
+          {{ "%+.2f"|format(idx.change_pct|float) }}%
+        </div>
+      </div>
+    {% endfor %}
+    </div>
+  </div>
+
+  <h2>大宗商品</h2>
+  <div class="card">
+    <div class="asset-grid">
+    {% for c in commodities %}
+      <div class="asset-card">
+        <div class="label">{{ c.name }}</div>
+        <div class="price">{{ "%.2f"|format(c.price|float) }}</div>
+        <div class="change {% if c.change_pct|float > 0 %}up{% else %}down{% endif %}">
+          {{ "%+.2f"|format(c.change_pct|float) }}%
+        </div>
+      </div>
+    {% endfor %}
+    {% if dollar and dollar.price %}
+      <div class="asset-card">
+        <div class="label">美元指数</div>
+        <div class="price">{{ "%.2f"|format(dollar.price|float) }}</div>
+        <div class="change {% if dollar.change_pct|float > 0 %}up{% else %}down{% endif %}">
+          {{ "%+.2f"|format(dollar.change_pct|float) }}%
+        </div>
+      </div>
+    {% endif %}
+    </div>
+  </div>
+
+</div>
+
+<!-- ============ 4. 机构观点 ============ -->
+<div id="tab-brokers" class="tab-panel">
+
+  <!-- AI 综合结论 -->
+  {% if broker_views %}
+  <h2>AI 综合结论</h2>
+  <div class="highlight-box"><div class="eyebrow">{{ broker_views.updated_at }} 更新</div><div class="body">{{ broker_views.conclusion }}</div></div>
+
+  <div class="sector-cols" style="margin-top:6pt">
+    <div>
+      <div style="font-size:.8rem;font-weight:500;color:var(--up);margin-bottom:4pt">看多共识</div>
+      {% for item in broker_views.consensus["看多共识"] %}
+      <div style="font-size:.78rem;padding:2pt 0;color:var(--olive)">+ {{ item }}</div>{% endfor %}
+    </div>
+    <div>
+      <div style="font-size:.8rem;font-weight:500;color:var(--down);margin-bottom:4pt">谨慎方向</div>
+      {% for item in broker_views.consensus["谨慎方向"] %}
+      <div style="font-size:.78rem;padding:2pt 0;color:var(--olive)">- {{ item }}</div>{% endfor %}
+    </div>
+  </div>
+  <div style="font-size:.75rem;color:var(--stone);margin-top:6pt">⚠ {{ broker_views.consensus["关键风险"]|join(" / ") }}</div>
+  {% endif %}
+
+  <!-- 事件日历 -->
+  <h2>重要事件日历 · 6月</h2>
+  <div class="card">
+    <table class="event-table">
+    {% for ev in event_calendar %}
+      <tr>
+        <td class="event-date">{{ ev.date }}</td>
+        <td><span class="event-tag {{ ev.tag_css }}">{{ ev.tag }}</span></td>
+        <td>{{ ev.event }}</td>
+      </tr>
+    {% endfor %}
+    </table>
+  </div>
+
+  <!-- 机构详细观点 -->
+  <h2>机构详细观点</h2>
+  <div class="card">
+    {% if broker_views %}
+    {% for b in broker_views.brokers %}
+    <div class="broker-item">
+      <span style="font-weight:500">{{ b.name }}</span>
+      <span style="font-size:.7rem;color:var(--stone)">· {{ b.date }}</span>
+      <span style="font-size:.7rem;{% if '多' in b.style %}color:var(--up){% elif '空' in b.style %}color:var(--down){% else %}color:var(--brand){% endif %}">· {{ b.style }}</span>
+      <span style="color:var(--olive);font-size:.78rem">— {{ b.view }}</span>
+      {% if b.url %}<a href="{{ b.url }}" target="_blank" style="font-size:.65rem;color:var(--brand);text-decoration:none">[来源]</a>{% endif %}
+    </div>
+    {% endfor %}
+    {% else %}
+    <div style="color:var(--stone);font-size:.85rem">机构观点整理中，稍后更新</div>
+    {% endif %}
+  </div>
+
+</div>
+
+<!-- ============ 5. 操作建议 ============ -->
+<div id="tab-advice" class="tab-panel">
+
+  <h2>总体风格</h2>
+  <div class="card" style="text-align:center">
+    <span class="style-badge {{ style.color }}">总体风格：{{ style.style }}</span>
+    <div style="font-size:.82rem;color:var(--olive);margin-top:4pt">{{ style.desc }}</div>
+    {% if ai_advice_text %}
+    <div class="highlight-box" style="margin-top:8pt;text-align:left"><div class="eyebrow">AI 研判</div>
+    <div class="ai-bullets">
+      {% set lines = ai_advice_text.split('\n') %}
+      {% for line in lines %}
+        {% if line.strip() %}<div class="bullet">{{ line.strip()|replace('1. ','')|replace('2. ','')|replace('3. ','')|replace('4. ','') }}</div>{% endif %}
+      {% endfor %}
+    </div></div>
+    {% endif %}
+  </div>
+
+  <h2>持仓操作建议</h2>
+  <div class="card">
+    {% if port_advice.buy %}
+    <div style="margin-bottom:6pt"><span style="font-weight:500;color:var(--up)">✅ 加仓</span></div>
+    {% for b in port_advice.buy %}
+    <div class="advice-item"><span class="advice-name">{{ b.name }}</span><span>{{ b.action }} · {{ b.reason }}</span></div>{% endfor %}
+    {% endif %}
+    {% if port_advice.hold %}
+    <div style="margin:6pt 0"><span style="font-weight:500;color:var(--brand)">⏸️ 持有</span></div>
+    {% for h in port_advice.hold %}
+    <div class="advice-item"><span class="advice-name">{{ h.name }}</span><span>{{ h.action }} · {{ h.reason }}</span></div>{% endfor %}
+    {% endif %}
+    {% if port_advice.sell %}
+    <div style="margin:6pt 0"><span style="font-weight:500;color:var(--down)">🔻 减仓</span></div>
+    {% for s in port_advice.sell %}
+    <div class="advice-item"><span class="advice-name">{{ s.name }}</span><span>{{ s.action }} · {{ s.reason }}</span></div>{% endfor %}
+    {% endif %}
+  </div>
+
+  <h2>心态提醒</h2>
+  <div class="psych-box">
+    {% set tips = psych_tip.split('\n') %}
+    {% for t in tips %}{% if t.strip() %}<p>{{ t.strip() }}</p>{% endif %}{% endfor %}
+  </div>
+
+</div>
+
+<div class="page-footer">
+  Sina · THS · SW · COMEX · DeepSeek AI · 报告生成 {{ generated_at }} · 仅供参考 · 不构成投资建议
+</div>
+
+<script>
+function switchTab(name){
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  var btn=document.querySelector('[onclick*=\"'+name+'\"]');
+  if(btn)btn.classList.add('active');
+  var panel=document.getElementById('tab-'+name);
+  if(panel)panel.classList.add('active');
+}
+</script>
+</body>
+</html>

@@ -469,7 +469,24 @@ jobs:
           else
             python main.py $FORCE_RUN_ARG
           fi
-      
+
+      - name: 生成 Kami HTML 看板
+        if: always()
+        run: |
+          echo "[Kami] 生成 HTML 看板..."
+          pip install jinja2 akshare --quiet 2>&1 || true
+          python generate_kami.py --force 2>&1 || echo "[Kami] 看板生成跳过"
+          ls -la docs/index.html 2>/dev/null && echo "[Kami] 看板已生成" || echo "[Kami] 未生成"
+
+      - name: 部署看板到 GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        if: always()
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs
+          destination_dir: dashboard
+          keep_files: true
+
       - name: 上传分析报告
         uses: actions/upload-artifact@v6
         if: always()
