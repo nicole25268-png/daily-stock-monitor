@@ -470,13 +470,13 @@ jobs:
             python main.py $FORCE_RUN_ARG
           fi
 
-      - name: 生成 Kami HTML 看板
+      - name: 生成看板数据 JSON + HTML
         if: always()
         run: |
-          echo "[Kami] 生成 HTML 看板..."
-          pip install jinja2 akshare --quiet 2>&1 || true
-          python generate_kami.py --force 2>&1 || echo "[Kami] 看板生成跳过"
-          ls -la docs/index.html 2>/dev/null && echo "[Kami] 看板已生成" || echo "[Kami] 未生成"
+          echo "[Dashboard] Exporting data..."
+          python scripts/export_dashboard_data.py 2>&1 || echo "[Dashboard] Data export skipped"
+          ls -la docs/ 2>/dev/null
+          echo "[Dashboard] Done"
 
       - name: 部署看板到 GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
@@ -484,8 +484,6 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./docs
-          destination_dir: dashboard
-          keep_files: true
 
       - name: 上传分析报告
         uses: actions/upload-artifact@v6
