@@ -1,41 +1,41 @@
 {
-  "generated_at": "2026-06-19 16:25:24",
+  "generated_at": "2026-06-22 19:04:44",
   "a_indices": [
     {
       "name": "上证指数",
       "code": "sh000001",
-      "price": 4090.48,
-      "change_pct": -0.43
+      "price": 4163.1,
+      "change_pct": 1.77
     },
     {
       "name": "沪深300",
       "code": "sh000300",
-      "price": 4941.6,
-      "change_pct": 0.21
+      "price": 5059.66,
+      "change_pct": 2.39
     },
     {
       "name": "中证A500",
       "code": "sh000510",
-      "price": 6219.79,
-      "change_pct": 0.51
+      "price": 6373.56,
+      "change_pct": 2.47
     },
     {
       "name": "科创50",
       "code": "sh000688",
-      "price": 1911.51,
-      "change_pct": 3.84
+      "price": 1948.93,
+      "change_pct": 1.96
     },
     {
       "name": "深证成指",
       "code": "sz399001",
-      "price": 16030.7,
-      "change_pct": 0.94
+      "price": 16372.5,
+      "change_pct": 2.13
     },
     {
       "name": "创业板指",
       "code": "sz399006",
-      "price": 4252.39,
-      "change_pct": 2.05
+      "price": 4359.39,
+      "change_pct": 2.52
     }
   ],
   "sectors": [
@@ -43,736 +43,736 @@
       "code": "801012",
       "name": "农产品加工",
       "l1_code": "801010",
-      "change_pct": 0.99,
-      "price": 2104.83
+      "change_pct": 1.19,
+      "price": 2075.34
     },
     {
       "code": "801014",
       "name": "饲料",
       "l1_code": "801010",
-      "change_pct": 0.94,
-      "price": 3304.09
+      "change_pct": -0.91,
+      "price": 3258.95
     },
     {
       "code": "801015",
       "name": "渔业",
       "l1_code": "801010",
-      "change_pct": 1.11,
-      "price": 646.4
+      "change_pct": -0.54,
+      "price": 635.36
     },
     {
       "code": "801016",
       "name": "种植业",
       "l1_code": "801010",
-      "change_pct": 0.38,
-      "price": 2343.16
+      "change_pct": -0.89,
+      "price": 2327.05
     },
     {
       "code": "801017",
       "name": "养殖业",
       "l1_code": "801010",
-      "change_pct": 2.78,
-      "price": 2420.58
+      "change_pct": -1.53,
+      "price": 2343.79
     },
     {
       "code": "801018",
       "name": "动物保健Ⅱ",
       "l1_code": "801010",
-      "change_pct": 0.37,
-      "price": 4152.63
+      "change_pct": 0.99,
+      "price": 4172.61
     },
     {
       "code": "801032",
       "name": "化学纤维",
       "l1_code": "801030",
-      "change_pct": 2.63,
-      "price": 5061.17
+      "change_pct": -2.73,
+      "price": 4918.27
     },
     {
       "code": "801033",
       "name": "化学原料",
       "l1_code": "801030",
-      "change_pct": 1.53,
-      "price": 3369.12
+      "change_pct": -4.44,
+      "price": 3330.1
     },
     {
       "code": "801034",
       "name": "化学制品",
       "l1_code": "801030",
-      "change_pct": 0.84,
-      "price": 7111.56
+      "change_pct": -4.26,
+      "price": 7064.1
     },
     {
       "code": "801036",
       "name": "塑料",
       "l1_code": "801030",
-      "change_pct": -1.39,
-      "price": 6185.17
+      "change_pct": -1.08,
+      "price": 6324.13
     },
     {
       "code": "801037",
       "name": "橡胶",
       "l1_code": "801030",
-      "change_pct": -1.55,
-      "price": 5192.18
+      "change_pct": -1.98,
+      "price": 5279.12
     },
     {
       "code": "801038",
       "name": "农化制品",
       "l1_code": "801030",
-      "change_pct": 1.46,
-      "price": 5140.75
+      "change_pct": -6.01,
+      "price": 5019.99
     },
     {
       "code": "801039",
       "name": "非金属材料Ⅱ",
       "l1_code": "801030",
-      "change_pct": -6.04,
-      "price": 8971.03
+      "change_pct": -2.24,
+      "price": 9795.22
     },
     {
       "code": "801043",
       "name": "冶钢原料",
       "l1_code": "801040",
-      "change_pct": 1.67,
-      "price": 3464.24
+      "change_pct": -4.74,
+      "price": 3366.15
     },
     {
       "code": "801044",
       "name": "普钢",
       "l1_code": "801040",
-      "change_pct": -0.19,
-      "price": 2104.9
+      "change_pct": -1.55,
+      "price": 2105.05
     },
     {
       "code": "801045",
       "name": "特钢Ⅱ",
       "l1_code": "801040",
-      "change_pct": -2.43,
-      "price": 3995.47
+      "change_pct": -1.42,
+      "price": 4064.81
     },
     {
       "code": "801051",
       "name": "金属新材料",
       "l1_code": "801050",
-      "change_pct": -4.85,
-      "price": 11905.9
+      "change_pct": 2.33,
+      "price": 12695.81
     },
     {
       "code": "801053",
       "name": "贵金属",
       "l1_code": "801050",
-      "change_pct": 2.13,
-      "price": 23521.69
+      "change_pct": -3.98,
+      "price": 22777.24
     },
     {
       "code": "801054",
       "name": "小金属",
       "l1_code": "801050",
-      "change_pct": -4.16,
-      "price": 45253.0
+      "change_pct": -4.79,
+      "price": 48351.94
     },
     {
       "code": "801055",
       "name": "工业金属",
       "l1_code": "801050",
-      "change_pct": 0.07,
-      "price": 3352.7
+      "change_pct": -4.62,
+      "price": 3346.93
     },
     {
       "code": "801056",
       "name": "能源金属",
       "l1_code": "801050",
-      "change_pct": -0.35,
-      "price": 22531.63
+      "change_pct": -6.44,
+      "price": 22083.22
     },
     {
       "code": "801081",
       "name": "半导体",
       "l1_code": "801080",
-      "change_pct": -3.79,
-      "price": 11553.77
+      "change_pct": -1.6,
+      "price": 12152.15
     },
     {
       "code": "801082",
       "name": "其他电子Ⅱ",
       "l1_code": "801080",
-      "change_pct": -1.89,
-      "price": 21995.45
+      "change_pct": -2.09,
+      "price": 22946.44
     },
     {
       "code": "801083",
       "name": "元件",
       "l1_code": "801080",
-      "change_pct": -2.85,
-      "price": 29292.88
+      "change_pct": 1.9,
+      "price": 30540.79
     },
     {
       "code": "801084",
       "name": "光学光电子",
       "l1_code": "801080",
-      "change_pct": 1.56,
-      "price": 2289.42
+      "change_pct": 0.45,
+      "price": 2298.17
     },
     {
       "code": "801085",
       "name": "消费电子",
       "l1_code": "801080",
-      "change_pct": -3.92,
-      "price": 12074.61
+      "change_pct": 0.69,
+      "price": 12646.94
     },
     {
       "code": "801086",
       "name": "电子化学品Ⅱ",
       "l1_code": "801080",
-      "change_pct": -1.95,
-      "price": 14959.59
+      "change_pct": -2.53,
+      "price": 15571.69
     },
     {
       "code": "801111",
       "name": "白色家电",
       "l1_code": "801110",
-      "change_pct": 1.88,
-      "price": 18146.78
+      "change_pct": -1.18,
+      "price": 17722.66
     },
     {
       "code": "801112",
       "name": "黑色家电",
       "l1_code": "801110",
-      "change_pct": 0.78,
-      "price": 2127.23
+      "change_pct": 0.61,
+      "price": 2107.55
     },
     {
       "code": "801113",
       "name": "小家电",
       "l1_code": "801110",
-      "change_pct": 0.36,
-      "price": 3950.91
+      "change_pct": -0.05,
+      "price": 3935.75
     },
     {
       "code": "801114",
       "name": "厨卫电器",
       "l1_code": "801110",
-      "change_pct": 0.72,
-      "price": 7770.72
+      "change_pct": 0.04,
+      "price": 7690.09
     },
     {
       "code": "801115",
       "name": "照明设备Ⅱ",
       "l1_code": "801110",
-      "change_pct": -1.77,
-      "price": 5457.1
+      "change_pct": 3.07,
+      "price": 5576.6
     },
     {
       "code": "801116",
       "name": "家电零部件Ⅱ",
       "l1_code": "801110",
-      "change_pct": -1.93,
-      "price": 7416.32
+      "change_pct": 0.69,
+      "price": 7558.99
     },
     {
       "code": "801124",
       "name": "食品加工",
       "l1_code": "801120",
-      "change_pct": -0.4,
-      "price": 12455.55
+      "change_pct": -1.37,
+      "price": 12532.94
     },
     {
       "code": "801125",
       "name": "白酒Ⅱ",
       "l1_code": "801120",
-      "change_pct": 1.78,
-      "price": 35386.1
+      "change_pct": -2.06,
+      "price": 34655.11
     },
     {
       "code": "801126",
       "name": "非白酒",
       "l1_code": "801120",
-      "change_pct": 3.04,
-      "price": 3364.41
+      "change_pct": -0.26,
+      "price": 3233.7
     },
     {
       "code": "801127",
       "name": "饮料乳品",
       "l1_code": "801120",
-      "change_pct": 1.33,
-      "price": 6668.78
+      "change_pct": -1.54,
+      "price": 6561.55
     },
     {
       "code": "801128",
       "name": "休闲食品",
       "l1_code": "801120",
-      "change_pct": 1.97,
-      "price": 1641.87
+      "change_pct": -0.05,
+      "price": 1605.21
     },
     {
       "code": "801129",
       "name": "调味发酵品Ⅱ",
       "l1_code": "801120",
-      "change_pct": 1.8,
-      "price": 6736.12
+      "change_pct": -1.44,
+      "price": 6619.51
     },
     {
       "code": "801131",
       "name": "纺织制造",
       "l1_code": "801130",
-      "change_pct": -0.27,
-      "price": 1667.02
+      "change_pct": -0.84,
+      "price": 1677.18
     },
     {
       "code": "801132",
       "name": "服装家纺",
       "l1_code": "801130",
-      "change_pct": 0.29,
-      "price": 1521.51
+      "change_pct": 0.39,
+      "price": 1517.26
     },
     {
       "code": "801133",
       "name": "饰品",
       "l1_code": "801130",
-      "change_pct": 0.71,
-      "price": 1340.28
+      "change_pct": -1.29,
+      "price": 1325.07
     },
     {
       "code": "801141",
       "name": "包装印刷",
       "l1_code": "801140",
-      "change_pct": -0.41,
-      "price": 3041.74
+      "change_pct": -0.74,
+      "price": 3041.41
     },
     {
       "code": "801142",
       "name": "家居用品",
       "l1_code": "801140",
-      "change_pct": 0.17,
-      "price": 1659.89
+      "change_pct": 0.16,
+      "price": 1653.07
     },
     {
       "code": "801143",
       "name": "造纸",
       "l1_code": "801140",
-      "change_pct": 2.47,
-      "price": 2081.14
+      "change_pct": -1.17,
+      "price": 2024.87
     },
     {
       "code": "801145",
       "name": "文娱用品",
       "l1_code": "801140",
-      "change_pct": 1.92,
-      "price": 1698.49
+      "change_pct": -0.57,
+      "price": 1658.01
     },
     {
       "code": "801151",
       "name": "化学制药",
       "l1_code": "801150",
-      "change_pct": -1.54,
-      "price": 10476.42
+      "change_pct": -1.13,
+      "price": 10583.65
     },
     {
       "code": "801152",
       "name": "生物制品",
       "l1_code": "801150",
-      "change_pct": -1.73,
-      "price": 4965.6
+      "change_pct": -0.53,
+      "price": 5016.82
     },
     {
       "code": "801153",
       "name": "医疗器械",
       "l1_code": "801150",
-      "change_pct": 0.55,
-      "price": 5671.97
+      "change_pct": 0.44,
+      "price": 5636.06
     },
     {
       "code": "801154",
       "name": "医药商业",
       "l1_code": "801150",
-      "change_pct": -0.27,
-      "price": 4327.58
+      "change_pct": -0.08,
+      "price": 4314.15
     },
     {
       "code": "801155",
       "name": "中药Ⅱ",
       "l1_code": "801150",
-      "change_pct": 0.21,
-      "price": 5320.32
+      "change_pct": -0.14,
+      "price": 5283.17
     },
     {
       "code": "801156",
       "name": "医疗服务",
       "l1_code": "801150",
-      "change_pct": -3.82,
-      "price": 5914.9
+      "change_pct": -2.83,
+      "price": 6127.07
     },
     {
       "code": "801161",
       "name": "电力",
       "l1_code": "801160",
-      "change_pct": 2.82,
-      "price": 3509.92
+      "change_pct": -0.9,
+      "price": 3404.56
     },
     {
       "code": "801163",
       "name": "燃气Ⅱ",
       "l1_code": "801160",
-      "change_pct": -0.07,
-      "price": 3062.46
+      "change_pct": -0.61,
+      "price": 3075.15
     },
     {
       "code": "801178",
       "name": "物流",
       "l1_code": "801170",
-      "change_pct": 1.21,
-      "price": 3986.65
+      "change_pct": -0.74,
+      "price": 3930.77
     },
     {
       "code": "801179",
       "name": "铁路公路",
       "l1_code": "801170",
-      "change_pct": 1.09,
-      "price": 1484.27
+      "change_pct": -0.65,
+      "price": 1463.54
     },
     {
       "code": "801181",
       "name": "房地产开发",
       "l1_code": "801180",
-      "change_pct": 0.31,
-      "price": 2228.44
+      "change_pct": 0.06,
+      "price": 2225.05
     },
     {
       "code": "801183",
       "name": "房地产服务",
       "l1_code": "801180",
-      "change_pct": 1.32,
-      "price": 749.53
+      "change_pct": -0.66,
+      "price": 734.08
     },
     {
       "code": "801202",
       "name": "贸易Ⅱ",
       "l1_code": "801200",
-      "change_pct": 0.38,
-      "price": 4476.85
+      "change_pct": -1.07,
+      "price": 4453.05
     },
     {
       "code": "801203",
       "name": "一般零售",
       "l1_code": "801200",
-      "change_pct": 1.79,
-      "price": 2695.16
+      "change_pct": -0.69,
+      "price": 2627.44
     },
     {
       "code": "801204",
       "name": "专业连锁Ⅱ",
       "l1_code": "801200",
-      "change_pct": 1.87,
-      "price": 3760.6
+      "change_pct": -0.85,
+      "price": 3656.4
     },
     {
       "code": "801206",
       "name": "互联网电商",
       "l1_code": "801200",
-      "change_pct": 0.56,
-      "price": 10037.77
+      "change_pct": -1.95,
+      "price": 9903.55
     },
     {
       "code": "801218",
       "name": "专业服务",
       "l1_code": "801210",
-      "change_pct": -0.72,
-      "price": 6412.31
+      "change_pct": -1.41,
+      "price": 6470.21
     },
     {
       "code": "801219",
       "name": "酒店餐饮",
       "l1_code": "801210",
-      "change_pct": 1.18,
-      "price": 1470.54
+      "change_pct": 0.28,
+      "price": 1445.35
     },
     {
       "code": "801231",
       "name": "综合Ⅱ",
       "l1_code": "801230",
-      "change_pct": -0.07,
-      "price": 4519.31
+      "change_pct": 1.5,
+      "price": 4544.07
     },
     {
       "code": "801711",
       "name": "水泥",
       "l1_code": "801710",
-      "change_pct": 1.29,
-      "price": 4048.2
+      "change_pct": -0.57,
+      "price": 3986.53
     },
     {
       "code": "801712",
       "name": "玻璃玻纤",
       "l1_code": "801710",
-      "change_pct": -0.03,
-      "price": 27816.79
+      "change_pct": -4.35,
+      "price": 28021.77
     },
     {
       "code": "801713",
       "name": "装修建材",
       "l1_code": "801710",
-      "change_pct": 1.4,
-      "price": 4969.36
+      "change_pct": -0.51,
+      "price": 4907.01
     },
     {
       "code": "801721",
       "name": "房屋建设Ⅱ",
       "l1_code": "801720",
-      "change_pct": 1.51,
-      "price": 2936.34
+      "change_pct": -0.29,
+      "price": 2885.42
     },
     {
       "code": "801722",
       "name": "装修装饰Ⅱ",
       "l1_code": "801720",
-      "change_pct": 0.14,
-      "price": 4349.35
+      "change_pct": -0.02,
+      "price": 4344.23
     },
     {
       "code": "801723",
       "name": "基础建设",
       "l1_code": "801720",
-      "change_pct": 1.51,
-      "price": 2186.67
+      "change_pct": -1.07,
+      "price": 2144.2
     },
     {
       "code": "801724",
       "name": "专业工程",
       "l1_code": "801720",
-      "change_pct": 1.63,
-      "price": 2048.51
+      "change_pct": -1.52,
+      "price": 2004.66
     },
     {
       "code": "801726",
       "name": "工程咨询服务Ⅱ",
       "l1_code": "801720",
-      "change_pct": -1.77,
-      "price": 2194.26
+      "change_pct": -1.1,
+      "price": 2256.96
     },
     {
       "code": "801731",
       "name": "电机Ⅱ",
       "l1_code": "801730",
-      "change_pct": -1.29,
-      "price": 14286.82
+      "change_pct": 0.27,
+      "price": 14359.07
     },
     {
       "code": "801733",
       "name": "其他电源设备Ⅱ",
       "l1_code": "801730",
-      "change_pct": -0.92,
-      "price": 49209.52
+      "change_pct": -1.4,
+      "price": 49894.33
     },
     {
       "code": "801735",
       "name": "光伏设备",
       "l1_code": "801730",
-      "change_pct": 0.4,
-      "price": 6667.05
+      "change_pct": -3.31,
+      "price": 6692.9
     },
     {
       "code": "801736",
       "name": "风电设备",
       "l1_code": "801730",
-      "change_pct": -0.35,
-      "price": 2531.4
+      "change_pct": -0.98,
+      "price": 2542.39
     },
     {
       "code": "801737",
       "name": "电池",
       "l1_code": "801730",
-      "change_pct": 1.14,
-      "price": 26991.23
+      "change_pct": -3.82,
+      "price": 26641.89
     },
     {
       "code": "801738",
       "name": "电网设备",
       "l1_code": "801730",
-      "change_pct": -0.04,
-      "price": 6297.92
+      "change_pct": -2.89,
+      "price": 6331.73
     },
     {
       "code": "801741",
       "name": "航天装备Ⅱ",
       "l1_code": "801740",
-      "change_pct": -2.53,
-      "price": 30495.19
+      "change_pct": 0.8,
+      "price": 30943.56
     },
     {
       "code": "801742",
       "name": "航空装备Ⅱ",
       "l1_code": "801740",
-      "change_pct": -0.39,
-      "price": 9314.54
+      "change_pct": -0.8,
+      "price": 9319.54
     },
     {
       "code": "801743",
       "name": "地面兵装Ⅱ",
       "l1_code": "801740",
-      "change_pct": -0.33,
-      "price": 16828.37
+      "change_pct": -0.87,
+      "price": 17093.49
     },
     {
       "code": "801744",
       "name": "航海装备Ⅱ",
       "l1_code": "801740",
-      "change_pct": 2.37,
-      "price": 3295.25
+      "change_pct": -3.19,
+      "price": 3200.98
     },
     {
       "code": "801745",
       "name": "军工电子Ⅱ",
       "l1_code": "801740",
-      "change_pct": -1.61,
-      "price": 6895.76
+      "change_pct": 1.37,
+      "price": 7029.98
     },
     {
       "code": "801764",
       "name": "游戏Ⅱ",
       "l1_code": "801760",
-      "change_pct": -1.21,
-      "price": 2668.9
+      "change_pct": -4.43,
+      "price": 2680.59
     },
     {
       "code": "801765",
       "name": "广告营销",
       "l1_code": "801760",
-      "change_pct": -1.16,
-      "price": 2605.11
+      "change_pct": -3.69,
+      "price": 2618.89
     },
     {
       "code": "801766",
       "name": "影视院线",
       "l1_code": "801760",
-      "change_pct": 0.09,
-      "price": 1044.59
+      "change_pct": -1.85,
+      "price": 1032.61
     },
     {
       "code": "801767",
       "name": "数字媒体",
       "l1_code": "801760",
-      "change_pct": -0.74,
-      "price": 1661.4
+      "change_pct": -3.4,
+      "price": 1666.66
     },
     {
       "code": "801769",
       "name": "出版",
       "l1_code": "801760",
-      "change_pct": -0.75,
-      "price": 1416.21
+      "change_pct": -1.43,
+      "price": 1418.55
     },
     {
       "code": "801782",
       "name": "国有大型银行Ⅱ",
       "l1_code": "801780",
-      "change_pct": 2.59,
-      "price": 1902.63
+      "change_pct": -1.13,
+      "price": 1848.34
     },
     {
       "code": "801783",
       "name": "股份制银行Ⅱ",
       "l1_code": "801780",
-      "change_pct": 2.37,
-      "price": 4114.33
+      "change_pct": -1.63,
+      "price": 4004.36
     },
     {
       "code": "801784",
       "name": "城商行Ⅱ",
       "l1_code": "801780",
-      "change_pct": 2.64,
-      "price": 1037.36
+      "change_pct": -0.7,
+      "price": 1007.0
     },
     {
       "code": "801785",
       "name": "农商行Ⅱ",
       "l1_code": "801780",
-      "change_pct": 2.59,
-      "price": 761.1
+      "change_pct": -0.91,
+      "price": 739.01
     },
     {
       "code": "801881",
       "name": "摩托车及其他",
       "l1_code": "801880",
-      "change_pct": 0.52,
-      "price": 3068.48
+      "change_pct": -1.22,
+      "price": 3038.1
     },
     {
       "code": "801951",
       "name": "煤炭开采",
       "l1_code": "801950",
-      "change_pct": 1.71,
-      "price": 3468.96
+      "change_pct": -1.92,
+      "price": 3418.53
     },
     {
       "code": "801952",
       "name": "焦炭Ⅱ",
       "l1_code": "801950",
-      "change_pct": 3.83,
-      "price": 1165.43
+      "change_pct": -1.15,
+      "price": 1120.31
     },
     {
       "code": "801962",
       "name": "油服工程",
       "l1_code": "801960",
-      "change_pct": 0.8,
-      "price": 2278.85
+      "change_pct": -1.3,
+      "price": 2258.95
     },
     {
       "code": "801963",
       "name": "炼化及贸易",
       "l1_code": "801960",
-      "change_pct": 2.57,
-      "price": 2844.05
+      "change_pct": -3.25,
+      "price": 2771.36
     },
     {
       "code": "801971",
       "name": "环境治理",
       "l1_code": "801970",
-      "change_pct": 0.01,
-      "price": 1943.9
+      "change_pct": -1.32,
+      "price": 1948.19
     },
     {
       "code": "801972",
       "name": "环保设备Ⅱ",
       "l1_code": "801970",
-      "change_pct": -0.8,
-      "price": 2457.91
+      "change_pct": -0.38,
+      "price": 2487.72
     },
     {
       "code": "801981",
       "name": "个护用品",
       "l1_code": "801980",
-      "change_pct": 0.5,
-      "price": 1201.99
+      "change_pct": 0.05,
+      "price": 1186.91
     },
     {
       "code": "801982",
       "name": "化妆品",
       "l1_code": "801980",
-      "change_pct": 1.09,
-      "price": 6049.58
+      "change_pct": 1.98,
+      "price": 5949.74
     }
   ],
   "market_stats": {
     "total": 5527,
-    "up": 2023,
-    "down": 3394,
-    "up_ratio": 36.6,
-    "limit_up": 78,
-    "limit_down": 5,
+    "up": 2915,
+    "down": 2468,
+    "up_ratio": 52.7,
+    "limit_up": 64,
+    "limit_down": 35,
     "total_amount_yi": 0.0
   },
   "global_indices": [
     {
       "name": "恒生指数",
-      "price": 23924.81,
-      "change_pct": -1.59
+      "price": 23768.52,
+      "change_pct": -0.65
     },
     {
       "name": "恒生科技",
-      "price": 4604.35,
-      "change_pct": -1.39
+      "price": 4549.41,
+      "change_pct": -1.19
     },
     {
       "name": "纳斯达克(昨收)",
@@ -788,49 +788,49 @@
   "commodities": [
     {
       "name": "COMEX黄金",
-      "price": 4163.35,
-      "change_pct": -82.55
+      "price": 4213.36,
+      "change_pct": -32.54
     },
     {
       "name": "COMEX白银",
-      "price": 64.91,
-      "change_pct": -1.89
+      "price": 66.19,
+      "change_pct": -0.61
     },
     {
       "name": "NYMEX原油",
-      "price": 76.58,
-      "change_pct": 0.73
+      "price": 74.0,
+      "change_pct": -1.85
     },
     {
       "name": "COMEX铜",
-      "price": 640.14,
-      "change_pct": -4.81
+      "price": 652.13,
+      "change_pct": -1.57
     }
   ],
   "news": [
     {
-      "title": "伊朗外交部发言人巴加埃19日在社交媒体发文，否认部分媒体关于“伊朗邀请国际原子能机构对伊朗核设施进行检查”的说法。 (新华社)"
+      "title": "土耳其总统埃尔多安与伊朗总统佩泽希齐扬通话，埃尔多安赞赏伊朗与美国达成的相关共识，并承诺全力支持以实现和平。同时，两国将继续加强在贸易、金融及能源等领域的合作。（央视新闻）"
     },
     {
-      "title": "黎巴嫩公共卫生部紧急行动中心称，自19日凌晨以来，以色列国防军的袭击在黎巴嫩已造成47人死亡、97人受伤。以色列国防军当地时间19日发表声明称，由于黎巴嫩真主党屡次违反停火协议，以军在过去一夜打击了80多个黎真主党目标，打死数十名真主党成员。 (央视新闻)"
+      "title": "当地时间22日，伊朗民航组织发布声明称，将在7月4日至9日已故最高领袖阿里·哈梅内伊的告别、送葬和安葬仪式期间，对国内部分机场实施航班管制。（央视新闻）"
     },
     {
-      "title": "伊朗外交部发言人巴加埃19日在社交媒体发文证实，原定于19日在瑞士举行的伊美谈判推迟，“我们目前正在讨论未来几天举行谈判的计划”。 (央视新闻)"
+      "title": "当地时间22日，伊朗外交部发言人巴加埃表示，伊朗与国际原子能机构的合作与互动将按照现行机制继续进行，并遵循伊朗议会相关法律以及最高国家安全委员会作出的决定。消息人士称，伊美在瑞士持续约18小时的谈判过程中，伊朗并未就核问题进行任何谈判，也没有接受任何新的承诺。根据伊美谅解备忘录，核问题相关谈判须在该备忘录第13条落实后方可启动。第13条的落实包括在所有战线（特别是黎巴嫩）停火、开始解除海上封锁、开始解冻伊朗被冻结资产以及签发解除伊朗原油、石油产品及衍生品制裁的豁免许可。22日，美国副总统万斯曾称，伊朗已同意允许国际原子能机构核查人员进入该国开展相关监督工作。（央视新闻）"
     },
     {
-      "title": "美国总统特朗普19日在社交媒体上连发两条帖文，就美国同伊朗的谈判对伊方施压。特朗普在一条帖文中写道：“因为绝望而去会面的不是我们，而是伊朗。他们完了！我们会把这60天耗完。他们拿不到钱，10美分都没有！”特朗普在另一条帖文中写道，“战事削弱了伊朗”“可民主党人却说，伊朗现在比4个月前更好”。瑞士外交部19日在其网站发表声明说，原定当天在瑞士中部卢塞恩附近的比尔根山举行的美伊会谈已取消。美国副总统万斯18日在白宫记者会上说，美国和伊朗谅解备忘录中规定的达成最终协议的60天期限从18日开始计算。 (新华社)"
+      "title": "当地时间22日，据土耳其外交部发布的声明，当日上午，一艘由土耳其所有、悬挂巴拿马国旗的货船在乌克兰切尔诺莫斯克港附近海域遭到无人机袭击。袭击导致船上的两名土耳其籍船员受伤。（央视新闻）"
     },
     {
-      "title": "据英国《泰晤士报》报道，英国内阁多名大臣将于当地时间今天（6月19日）下午告诉首相斯坦默，应为其离职设定“时间表”。据报道，多名内阁大臣将对斯塔默说，他的“时间到了”。 (CCTV国际时讯)"
+      "title": "俄罗斯沃罗涅日州州长亚历山大·古谢夫22日在社交媒体发文称，乌克兰武装部队当天向该州发射导弹，袭击造成5人死亡。古谢夫说，俄武装部队防空系统当天在沃罗涅日州上空发现并摧毁数个高速空中目标，该州一家企业的生产设施受损。此外，10栋居民楼外立面、玻璃窗受损，另有一批车辆遭到损毁。（新华社）"
     },
     {
-      "title": "以色列第12频道电视台19日援引一名以色列官员的话报道说，以色列与黎巴嫩真主党达成了停火。这名官员说，我们仍将留在黎巴嫩南部的“安全区”内。“如果他们攻击我们，我们将予以还击”。 (新华社)"
+      "title": "超微电脑涨幅扩大至19%。"
     },
     {
-      "title": "随着全球AI产业景气度持续攀升，韩国科技赛道以自身特色持续吸引全球跨境资金流入，在此背景下，基金公司一方面持续推出各类韩国主题ETF，另一方面主动权益类QDII也逐步提升韩国仓位。业内人士认为，当前韩股估值低于美股，叠加全球AI产业长期红利，市场存估值修复空间，不过，针对近期韩国主题ETF产品的炒作现象，部分基金公司就此也开始提示投资风险。 (证券时报)"
+      "title": "伊朗伊斯兰共和国通讯社22日援引伊朗外交部发言人巴加埃的话报道，伊朗与国际原子能机构的合作与互动将按照现行机制继续进行，并遵循伊朗议会相关法律以及最高国家安全委员会作出的决定。报道还援引消息人士的话说，伊美在瑞士持续约18小时的谈判过程中，伊朗方面未就核问题展开谈判，也未作出任何新的相关承诺。（新华社）"
     },
     {
-      "title": "媒体援引一名美国官员的话报道称，以色列与黎巴嫩真主党已同意停火，停火将于“当地时间周五（19日）下午4时开始”。 (新华社)"
+      "title": "美国副总统万斯表示，对所取得的进展感到非常满意。看到大约1500万桶石油从霍尔木兹（海峡）运出，将建立相关机制以确保霍尔木兹海峡保持畅通。（财联社）"
     }
   ]
 }
